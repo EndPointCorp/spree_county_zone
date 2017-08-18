@@ -1,0 +1,25 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::County) %>
+<% end %>
+
+
+<div data-hook="country" class="form-group">
+  <%= label_tag :country, Spree.t(:country) %>
+  <select id="country" class='select2' data-base-url="<%= api_v1_country_states_url(format: :json) %>?country_id=">
+    <%= options_from_collection_for_select(@countries, :id, :name, @country.id) %>
+  </select>
+</div>
+<div  data-hook="state" class="form-group">
+  <label for="state"><%=  Spree.t(:state) %></label>
+  <select id="state" class='observe_field select2' data-base-url="<%=admin_counties_path(:format => :js)%>?country_id=<%= @country.id %>&state_id=" data-update="#county-list">
+    <%= options_from_collection_for_select(@states, :id, :name, @state.id  ) %>
+  </select>
+</div>
+
+<div class="row">
+
+
+  <div id="county-list" data-hook>
+    <%= render partial: 'counties_list'%>
+  </div>
+</div>

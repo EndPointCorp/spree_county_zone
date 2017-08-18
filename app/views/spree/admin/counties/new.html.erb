@@ -1,0 +1,18 @@
+
+<div>
+  <div><%= Spree.t(:country) %>: <%= @country.name %></div>
+  <div><%= Spree.t(:state) %>: <%= @state.name %> <%= ', ' + @state.abbr if @state.abbr %></div>
+</div>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @county } %>
+
+<%= form_for [:admin, @country, @state, @county] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success', data: { disable_with: "#{ Spree.t(:saving) }..." }} %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= button_link_to Spree.t('actions.cancel'), admin_country_state_counties_path( @country, @state ), icon: 'remove' %>
+    </div>
+  </fieldset>
+<% end %>

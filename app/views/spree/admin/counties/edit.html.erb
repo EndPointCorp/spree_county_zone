@@ -1,0 +1,19 @@
+<div>
+  <div><%= Spree.t(:country) %>: <%= @country.name %></div>
+  <div><%= Spree.t(:state) %>: <%= @state.name %> <%= ', ' + @state.abbr if @state.abbr %></div>
+</div>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @county } %>
+
+<%= form_for [:admin, @country, @state, @county] do |f| %>
+  <fieldset>
+    <div  data-hook="state" class="form-group">
+      <label for="state"><%=  Spree.t(:state) %></label>
+      <select name="county[state_id]" id="state" class='observe_field select2' >
+        <%= options_from_collection_for_select(@states, :id, :name, @state.id) %>
+      </select>
+    </div>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>
