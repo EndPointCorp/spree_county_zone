@@ -23,10 +23,10 @@ class Spree::Api::V1::CountiesController < Spree::Api::BaseController
 
   def scope
     if params[:state_id]
-      @state = Spree::State.accessible_by(current_ability, :read).find(params[:state_id])
-      return @state.counties.accessible_by(current_ability, :read).order('name ASC')
+      @state = Spree::State.find(params[:state_id])
+      return @state.counties.order('name ASC')
     else
-      return Spree::County.accessible_by(current_ability, :read).order('name ASC')
+      return Spree::County.order('name ASC')
     end
   end
 end

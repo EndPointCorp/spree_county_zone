@@ -8,4 +8,12 @@ Spree::Core::Engine.add_routes do
       end
     end
   end
+
+
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1 do
+      resources :counties, only: [:index]
+    end
+  end
+
 end
